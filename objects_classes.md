@@ -376,3 +376,60 @@ const user: IReadonly = {
 };
 user.admin = "K";
 ```
+
+### Extending Interfaces
+
+```ts
+interface IPerson {
+  name: string;
+
+  age: number;
+
+  greet(phrase: string): void;
+}
+
+interface IPilot extends IPerson {
+  flyMessage(): void;
+}
+```
+
+13. Інтерфейси як тип функції
+
+```ts
+type AddFunc = (n1: number, n2: number) => number;
+
+let add: AddFunc;
+
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
+
+interface AddFunc {
+  (n1: number, n2: number): number;
+}
+
+let add: AddFunc;
+
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
+```
+
+### Опціональні параметри
+
+```ts
+interface IPerson {
+  name?: string;
+  age: number;
+}
+
+class Person implements IPerson {
+  name?: string;
+
+  constructor(public age: number) {}
+
+  setName(n: string) {
+    this.name = n;
+  }
+}
+```
