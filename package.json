@@ -19,11 +19,12 @@
     "scheduler": "^0.27.0",
     "source-map-js": "^1.2.1",
     "tinyglobby": "^0.2.17",
-    "typescript": "^6.0.3",
     "undici-types": "^7.18.2",
     "vite": "^8.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -40,5 +41,6 @@
   "bugs": {
     "url": "https://github.com/Ivan-Malakhovskyi/goiteens-ts-course/issues"
   },
-  "homepage": "https://github.com/Ivan-Malakhovskyi/goiteens-ts-course#readme"
+  "homepage": "https://github.com/Ivan-Malakhovskyi/goiteens-ts-course#readme",
+  "description": "1. Конструктор"
 }

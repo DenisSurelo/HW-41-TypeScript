@@ -1,262 +1,83 @@
-// **public** - це як всі властивості та методи в js, можна викликати будь-де
-// **private** - є доступ тільки в класі, не наслідується
-// **protected** - наслідується, не можна викликати в екземплярі, але можна звернутись до властивості через метод класу або через геттери і сеттери
+let age: number = 50;
+let name: string = 'Max';
+let toggle:boolean = true;
+let empty:null = null;
+let notInitialize:undefined = undefined;
 
-// Вибираємо за змістом,
-// public - коли це інтерфейс взаємодії,
-// private - коли це технічні методи або властивості, які не варто викликати поза класом,
-// protected - коли це технічні методи або властивості, які не варто викликати поза, але при цьому вони повинні наслідуватися дочірніми.
 
-// class Student {
-//   private friends: string[] = [];
-//   protected createdAt: Date = new Date();
-//   private id: number = 0;
+let callback = (a:number): number => { return 100 + a }; 
+// тут трохи не розібрався з (a:number), глянув в інтернеті
 
-//   constructor(
-//     public name: string = "",
-//     public age: number = 0,
-//     public city: string = "",
-//   ) {}
 
-//   public addFriend(newFriend: string) {
-//     this.friends.push(newFriend);
-//   }
 
-//   public showFriends(this: Student) {
-//     console.log(this.friends);
-//   }
-// }
+let anything: any= -20;
+anything = 'Text';
+anything = {};
+// тут також в документації глянув
 
-// const student = new Student("Bob", 19, "Kyiv");
-// student.friends.push("");
 
-// student.addFriend("Taras");
+let some:unknown;
+some = 'Text';
+let str: string;
+str = some as string;
+// і тут глянув документацію, не памятаю шоб ми це розглядали на уроці
 
-// console.log(student);
-// student.showFriends();
 
-// const copy = {
-//   showFriends: student.showFriends,
-//   addFriend: student.addFriend,
-//   name: "Name",
-//   age: 20,
-//   city: "",
-//   friends: ["new friend"],
-//   createdAt: new Date(),
-// };
+const person: readonly [string, number] = ['Max', 21];
+// 
 
-// copy.showFriends();
+enum  LoadingStatus {
+LOADING,
+READY
+}
+// 
 
-// class NewStudent extends Student {
-//   show() {
-//     console.log(this.createdAt);
-//   }
-// }
+let value: string | number;
+// 
 
-// const student1 = new NewStudent();
-// student1.show();
+let status: 'enable' | 'disable';
+// 
 
-// SET & GET мають вищий пріоритет при зверненні до ключа, якщо назва змінних збігається
+function showMessage(message: string) {
+ console.log(message);
+}
 
-// type TPersonalInfo = {
-//   firstName: string;
-//   lastName: string;
-// };
+function calc(num1: number, num2: number) {
+ return num1 + num2;
+}
 
-// class Person {
-//   private personalInfo: TPersonalInfo = {
-//     firstName: "",
-//     lastName: "",
-//   };
+function customError() {
+ throw new Error('Error');
+}
+//
 
-//   public getFirstName() {
-//     console.log("getFirstName", this.personalInfo);
-//   }
+type Page = {
+    title:string;
+    likes: number;
+    accounts: string[]
+    status: 'open' | 'close'
+    details?: {
+        createAt: Date
+        updateAt: Date
+    }
+}
 
-//   set firstName(value: string) {
-//     this.personalInfo.firstName = value;
-//   }
+const page1:Page = {
+ title: 'The awesome page',
+ likes: 100,
+ accounts: ['Max', 'Anton', 'Nikita'],
+ status: 'open',
+ details: {
+   createAt: new Date('2021-01-01'),
+   updateAt: new Date('2021-05-01'),
+ }
+}
 
-//   set lastName(value: string) {
-//     this.personalInfo.lastName = value;
-//   }
+const page2:Page = {
+ title: 'Python or Js',
+ likes: 5,
+ accounts: ['Alex'],
+ status: 'close',
+}
 
-//   get personalData() {
-//     console.log("personalData");
-//     console.log(this.personalInfo);
-//     return this.personalInfo;
-//   }
-// }
 
-// const person = new Person();
-// person.firstName = "new first name";
-// person.lastName = "new last name";
-
-// person.getFirstName();
-// person.personalData;
-
-// class House {
-//   constructor(
-//     public street: string,
-//     public name: string,
-//   ) {}
-
-//   showAddress(this: House) {
-//     console.log(this.street);
-//   }
-// }
-
-// class StoneHouse extends House {
-//   constructor(
-//     street: string,
-//     name: string,
-//     public address: number,
-//   ) {
-//     super(street, name);
-//   }
-
-//   get showStreet() {
-//     return this.street;
-//   }
-
-//   set setAddress(newAddress: number) {
-//     this.address = newAddress;
-//   }
-// }
-
-// const stone = new StoneHouse("S.Bandery", "house", 28);
-// console.log(stone.showStreet);
-// console.log((stone.setAddress = 62));
-
-// Статичні властивості залишаються в класі, не йдуть на прототип
-
-// Статичний метод по факту - це як звичайна функція, що зберігається у класі.
-
-// Звертання до статичних властивостей в статичних методів через this
-
-// class UserStatic {
-//   private static count = 0;
-
-//   constructor() {
-//     UserStatic.count += 1;
-//   }
-
-//   public static runStaticMethod() {
-//     console.log("RUN STATIC");
-//     console.log(this.count);
-//   }
-
-//   public showCount() {
-//     console.log(UserStatic.count);
-//   }
-// }
-
-// const obj1 = new UserStatic();
-// const obj2 = new UserStatic();
-// const obj3 = new UserStatic();
-// const obj4 = new UserStatic();
-
-// obj1.showCount();
-// obj1.showCount();
-// obj1.showCount();
-// obj1.showCount();
-// obj2.showCount();
-// obj3.showCount();
-
-// abstract class Plane {
-//   protected pilotInCabin: boolean = false;
-//   public sitInPlan() {
-//     this.pilotInCabin = true;
-//   }
-
-//   public abstract startEngine(): boolean;
-// }
-
-// class Maize extends Plane {
-//   public startEngine() {
-//     // Запускаємо гвинти двигуна
-//     return true;
-//   }
-// }
-
-// class Boeing extends Plane {
-//   public startEngine() {
-//     // Розігріваємо реактивні турбіни
-//     return true;
-//   }
-// }
-
-// type TExample = {};
-
-// interface IFlyable {
-//   attitude: number;
-//   fly: () => void;
-// }
-
-// interface ISwimmable {
-//   depth: number;
-//   swim: () => void;
-// }
-
-// class Duck implements IFlyable, ISwimmable {
-//   constructor(
-//     public attitude: number = 0,
-//     public depth: number = 0,
-//   ) {}
-
-//   fly() {
-//     console.log("FLy");
-//   }
-
-//   swim() {
-//     console.log("SWIM");
-//   }
-// }
-
-// IIFE
-
-// (() => {})();
-
-// enum Admin {
-//   admin = "admin",
-//   superadmin = "superadmin",
-// }
-
-// export type TAdmin = "admin" | "superadmin";
-
-// interface IReadOnly {
-//   readonly admin: Admin;
-// }
-
-// const user: IReadOnly = {
-//   admin: Admin.admin,
-// };
-
-// user.admin = Admin.admin;
-
-// type IFunc = (a: number) => void;
-// interface A {
-//   id: string;
-//   (a: number): void;
-// }
-
-// interface B extends A {
-//   createdAt: string;
-// }
-
-// interface IPerson {
-//   name?: string;
-//   age: number;
-// }
-
-// class Person implements IPerson {
-//   //  pu name?: string;
-
-//   constructor(public age: number) {}
-
-//   setAge(n: number) {
-//     this.age = n;
-//   }
-// }
-
-// const person = new Person();
